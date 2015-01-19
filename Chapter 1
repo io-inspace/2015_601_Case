@@ -1,0 +1,27 @@
+%First attempt at modeling a discrete equation:
+R = .05;
+initN = 1;
+steps = 50;
+N = zeros(1,steps);
+N(1,1) = initN;
+for t = 2:steps
+   N(1,t)=R*N(1,t-1)+N(1,t-1)
+end
+
+figure(1)
+plot(1:steps,N,'g-','LineWidth',2)
+hold on
+title('Geometric Growth')
+xlabel('Time')
+ylabel('Population Size')
+
+%First attempt at modeling a continuous equation:
+f = @(t,N,r) [r*N];
+[t4,N4]=ode45(f,[0,50],1,odeset,.05);
+
+figure(1)
+plot(N4,'g-','LineWidth',2)
+hold on
+title('Continuous Growth')
+xlabel('Time')
+ylabel('Population Size')
